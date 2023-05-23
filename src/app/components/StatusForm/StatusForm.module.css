@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 15px;
+}
+
+
+.button {
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    background-color: transparent;
+    color: white;
+}

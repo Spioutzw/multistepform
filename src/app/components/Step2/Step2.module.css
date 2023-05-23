@@ -1,0 +1,30 @@
+.containerDiv {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    margin : 10px 15px;
+}
+
+.image {
+    margin : 8px 20px 0 10px;
+}
+
+.card > p {
+    padding: 2px;
+}
+
+.titleChoice {
+    color : #022959;
+    font-weight: 500;
+}
+.price {
+    color: #9699AA;
+    font-size: 14px;
+}
+
+.free {
+    color : #022959;
+    font-size: 12px;
+}

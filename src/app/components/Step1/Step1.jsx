@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useFormState } from '../../context/contextForm';
+import TitleSubtitle from '../TitleSubtitle/TitleSubtitle';
+import style from './Step1.module.css';
 
 const schema = yup.object({
   Name: yup.string().required(),
@@ -14,32 +16,39 @@ const schema = yup.object({
 }).required();
 
 
-function Step1({formStep, nextStep}) {
+function Step1({nextStep}) {
 
-  const { data ,setFormValues } = useFormState();
-  const { register, handleSubmit, formState: { errors } } = useForm({resolver: yupResolver(schema), defaultValues: data});
+  const { data, setFormValues } = useFormState();
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema), defaultValues: data });
 
   const saveData = (data) => {
+    console.log(data)
     setFormValues(data);
     nextStep();
-  };
+};
 
 
   return (
     <>
-        <LeftBar/>
+      <LeftBar />
+      <div className={style.containerAll}>
+        <div className={style.containerForm}>
+          <TitleSubtitle title="Personal Info" subTitle="Please provide your name, email address, and phone number." />
+          <form id='stepForm' className={style.form} onSubmit={handleSubmit(saveData)}>
+            <label htmlFor="name-input">Name</label>
+            <input id="name-input" type="text" placeholder="e.g Stephen King" {...register("Name")} />
+            <p>{errors.Name?.message}</p>
 
-        <h2>Select your plan</h2>
-        <form onSubmit={handleSubmit(saveData)}>
-          <input type="text" placeholder="e.g Stephen King" {...register("Name")} />
-          <p>{errors.Name?.message}</p>
-          <input type='email' placeholder="e.g stephenking@lorem.com" {...register("Email")} />
-          <p>{errors.Email?.message}</p>
-          <input type='tel' placeholder="e.g 1234567890" {...register("Phone")} />
-          <p>{errors.Phone?.message}</p>
-          <button type="submit">Next</button>
-        </form>
+            <label htmlFor="email-input">Email address</label>
+            <input id="email-input" type='email' placeholder="e.g stephenking@lorem.com" {...register("Email")} />
+            <p>{errors.Email?.message}</p>
 
+            <label htmlFor="phone-input">Phone Number</label>
+            <input id="phone-input" type='tel' placeholder="e.g 1234567890" {...register("Phone")} />
+            <p>{errors.Phone?.message}</p>
+          </form>
+        </div>
+      </div>
     </>
   )
 }

@@ -1,3 +1,21 @@
+.containerAll {
+    height: 100vh;
+    background-color: #EFF5FF;
+}
+
+.containerForm {
+    position: absolute;
+    margin: 0 15px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+    top: 98px;
+}
+
+.containerForm > * {
+    margin-bottom: 20px;
+}
+
 .containerDiv {
     display: flex;
     justify-content: flex-start;
@@ -27,4 +45,23 @@
 .free {
     color : #022959;
     font-size: 12px;
+}
+
+.YM {
+    border-radius: 5px;
+    background-color: #F8F9FF;
+    text-align: center;
+    margin: 10px 15px;
+}
+
+.YM > span {
+    font-size: 14px;
+}
+
+.YM span:first-child {
+    color: #022959
+}
+
+.YM span:last-child {
+    color: #9699AA;
 }

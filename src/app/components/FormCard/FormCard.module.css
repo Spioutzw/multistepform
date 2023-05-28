@@ -1,0 +1,34 @@
+.containerButton {
+    display: flex;
+    justify-content: space-between;
+    height: 72px;
+    
+}
+
+.buttonNext {
+    border-radius: 4px;
+    background-color: #022959;
+    height: 40px;
+    width: 97px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 16px;
+    border: transparent;
+    cursor: pointer;
+}
+
+.buttonNext > span {
+    padding: 16px 12px;
+}
+
+.buttonBack {
+    align-self: center;
+    background-color: white;
+    border: transparent;
+    color: #9699AA;
+    font-size: 14px;
+    font-weight: 500;
+    height: 16px;
+    margin : 25px 0 31px 16px
+}

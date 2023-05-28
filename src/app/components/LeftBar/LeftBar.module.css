@@ -1,6 +1,7 @@
 .container {
-    height: 31vh;
+    height: 25vh;
     background: url('/images/bg-sidebar-mobile.svg') no-repeat;
-    background-size: cover;
+    background-size: 100%, contain;
+    position: relative;
 }
 

@@ -14,7 +14,7 @@ const schema = yup.object({
 }).required();
 
 
-function Step1({ formStep, nextStep }) {
+function Step3({ formStep, nextStep }) {
     const { data ,setFormValues } = useFormState();
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema), defaultValues: data});
 
@@ -42,4 +42,4 @@ function Step1({ formStep, nextStep }) {
     )
 }
 
-export default Step1
+export default Step3

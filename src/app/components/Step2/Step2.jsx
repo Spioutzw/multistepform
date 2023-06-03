@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { memo, use, useCallback, useEffect, useRef, useState } from 'react'
 import LeftBar from '../LeftBar/LeftBar'
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useFormState } from '../../context/contextForm';
@@ -12,23 +12,17 @@ import { Switch } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TitleSubtitle from '../TitleSubtitle/TitleSubtitle';
 
-const schema = yup.object({
-    Name: yup.string().required(),
-    Email: yup.string().email().required(),
-    Phone: yup.number().positive().integer().required(),
-}).required();
-
 const CustomSwitch = styled(Switch)(({ theme }) => ({
     '& .MuiSwitch-thumb': {
-      width: 10,
-      height: 10,
-      margin: 5,
-      backgroundColor: 'white',
-      
+        width: 10,
+        height: 10,
+        margin: 5,
+        backgroundColor: 'white',
+
     },
     '& .Mui-checked .MuiSwitch-thumb': {
         backgroundColor: 'white',
-      },
+    },
     '& .MuiSwitch-track': {
         backgroundColor: '#022959',
         opacity: 1,
@@ -36,33 +30,75 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
     '& .Mui-checked + .MuiSwitch-track': {
         backgroundColor: '#022959',
         opacity: 1,
-      },
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      transform: 'translateX(20px)',
     },
-  }));
+    '& .MuiSwitch-switchBase.Mui-checked': {
+        transform: 'translateX(20px)',
+    },
+}));
 
 
 function Step2({ nextStep }) {
     const { data, setFormValues } = useFormState();
-    console.log(data)
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [toggle, setToggle] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState(null);
+    const [isMonthly, setIsMonthly] = useState(true);
+    const [planPrices, setPlanPrices] = useState({
+        Arcade: {
+            name: 'Arcade',
+            monthly: '$9',
+            yearly: '$90'
+        },
+        Advanced: {
+            name: 'Advanced',
+            monthly: '$12',
+            yearly: '$120'
+        },
+        Pro: {
+            name: 'Pro',
+            monthly: '$15',
+            yearly: '$150'
+        }
+    });
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema), defaultValues: data });
+    const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: data });
 
-    const saveData = (data) => {
-        setFormValues(data);
+
+    const updateData = (plan) => {
+
+        const selectedPlan = {
+            name: plan.name,
+            price: isMonthly ? plan.monthly : plan.yearly,
+            isMonthly: isMonthly
+        };
+        setSelectedPlan(selectedPlan);
+    }
+
+    const saveData = () => {
+        if (selectedPlan === null) {
+            alert('Veuillez sélectionner un plan avant de continuer');
+            return;
+        }
+        setFormValues(selectedPlan);
         nextStep();
     };
 
-    const handleToggle = () => {
-        setToggle(!toggle);
-    }
+    const handleChangeSwitch = () => {
+        setIsMonthly(!isMonthly);
+    };
 
-    const handleOptionClick = (option) => {
-        setSelectedOption(option);
-    }
+    const arcadeRef = useRef();
+    const advancedRef = useRef();
+    const proRef = useRef();
+
+
+    const handleSelectStyle = useCallback((event) => {
+        [arcadeRef, advancedRef, proRef].forEach(ref => {
+          ref.current.classList.remove(`${style.selected}`);
+        });
+      
+        event.target.classList.add(`${style.selected}`);
+      }, []);
+
+      console.log(selectedPlan);
 
     return (
         <>
@@ -70,34 +106,34 @@ function Step2({ nextStep }) {
             <div className={style.containerAll}>
                 <div className={style.containerForm}>
                     <TitleSubtitle title="Select your plan" subTitle="You have the option of monthly or yearly billing." />
-                    <form id='stepForm' onSubmit={handleSubmit(saveData)}>
-                        <div className={style.containerDiv}>
+                    <form id='stepForm' onSubmit={ () => handleSubmit(saveData)}>
+                        <div ref={arcadeRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Arcade); handleSelectStyle(e) }} >
                             <Image className={style.image} src="/images/icon-arcade.svg" alt="Picture of the author" width={30} height={30} />
-                            <div onClick={() => handleOptionClick('basic')} className={style.card}>
-                                <p className={style.titleChoice}>Arcade</p>
-                                <p className={style.price}>$90/yr</p>
-                                <p className={style.free}>2 months free</p>
+                            <div className={style.card}>
+                                <p className={style.titleChoice}>{planPrices.Arcade.name}</p>
+                                <p className={style.price}>{isMonthly ? planPrices.Arcade.monthly : planPrices.Arcade.yearly}</p>
+                                {isMonthly ? <p className={style.free}>2 months free </p> : ''}
                             </div>
                         </div>
-                        <div className={style.containerDiv}>
+                        <div ref={advancedRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Advanced); handleSelectStyle(e) }}>
                             <Image className={style.image} src="/images/icon-advanced.svg" alt="Picture of the author" width={30} height={30} />
-                            <div onClick={() => handleOptionClick('standard')} className={style.card}>
-                                <p className={style.titleChoice}>Advanced</p>
-                                <p className={style.price}>$120/yr</p>
-                                <p className={style.free}>2 months free</p>
+                            <div className={style.card}>
+                                <p className={style.titleChoice}>{planPrices.Advanced.name}</p>
+                                <p className={style.price}>{isMonthly ? planPrices.Advanced.monthly : planPrices.Advanced.yearly}</p>
+                                {isMonthly ? <p className={style.free}>2 months free </p> : ''}
                             </div>
                         </div>
-                        <div className={style.containerDiv}>
+                        <div ref={proRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Pro); handleSelectStyle(e) }}>
                             <Image className={style.image} src="/images/icon-pro.svg" alt="Picture of the author" width={30} height={30} />
-                            <div onClick={() => handleOptionClick('premium')} className={style.card}>
-                                <p className={style.titleChoice}>Pro</p>
-                                <p className={style.price}>$150/yr</p>
-                                <p className={style.free}>2 months free</p>
+                            <div className={style.card}>
+                                <p className={style.titleChoice}>{planPrices.Pro.name}</p>
+                                <p className={style.price}>{isMonthly ? planPrices.Pro.monthly : planPrices.Pro.yearly}</p>
+                                {isMonthly ? <p className={style.free}>2 months free </p> : ''}
                             </div>
                         </div>
                         <div className={style.YM}>
                             <span>Monthly</span>
-                            <CustomSwitch  defaultChecked  />
+                            <CustomSwitch onChange={handleChangeSwitch} />
                             <span>Yearly</span>
                         </div>
                     </form>
@@ -108,4 +144,4 @@ function Step2({ nextStep }) {
     )
 }
 
-export default Step2
+export default memo(Step2)

@@ -5,6 +5,7 @@ import styles from './page.module.css'
 import { FormProvider } from './context/contextForm'
 import {  useState } from 'react';
 import FormCard from './components/FormCard/FormCard'
+import Step3 from './components/Step3/Step3'
 
 export default function Home() {
 
@@ -24,8 +25,8 @@ export default function Home() {
       <main className={styles.main}>
         <FormCard currentStep={formStep} prevFormStep={prevStep} nextFormStep={nextStep} >
           {formStep === 0 && <Step1 formStep={formStep} nextStep={nextStep}  />}
-          {formStep === 1 && <Step2 formStep={formStep} prevStep={prevStep}  />}
-          {formStep === 2 && <Step3 formStep={formStep} prevStep={prevStep}  />}
+          {formStep === 1 && <Step2 formStep={formStep} prevStep={prevStep} nextStep={nextStep}  />}
+          {formStep === 2 && <Step3 formStep={formStep} prevStep={prevStep} nextStep={nextStep}  />}
         </FormCard>
       </main>
     </FormProvider>

@@ -25,6 +25,12 @@
     margin : 10px 15px;
 }
 
+.selected {
+    border-color: #483EFF;
+    background-color: #F8F9FF
+    ;
+}
+
 .image {
     margin : 8px 20px 0 10px;
 }

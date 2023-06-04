@@ -24,8 +24,44 @@
     margin : 10px 15px;
 }
 
+.containerDiv input[type="checkbox"] {
+    margin: 21px 16px;
+  }
+  
+  .containerDiv > div {
+    flex-grow: 1;
+    align-self: center;
+  }
+
+  .containerDiv > div > p {
+    margin-top: 10px;
+  }
+  
+  .containerDiv .price {
+    margin-left: auto;
+  }
+
 .price {
     align-self: center;
+    font-size: 12px;
+    color: #483EFF;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #022959;
+}
+
+.description {
+    font-size: 12px;
+    color: #9699AA;
+}
+
+.selected {
+    border-color: #483EFF;
+    background-color: #F8F9FF
+    ;
 }
 
 .containerLP {

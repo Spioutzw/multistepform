@@ -16,7 +16,7 @@ const schema = yup.object({
 }).required();
 
 
-function Step1({nextStep}) {
+function Step1({nextStep, setCurrentStep}) {
 
   const { data, setFormValues } = useFormState();
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema), defaultValues: data });
@@ -30,7 +30,6 @@ function Step1({nextStep}) {
 
   return (
     <>
-      <LeftBar />
       <div className={style.containerAll}>
         <div className={style.containerForm}>
           <TitleSubtitle title="Personal Info" subTitle="Please provide your name, email address, and phone number." />

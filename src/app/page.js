@@ -6,14 +6,18 @@ import { FormProvider } from './context/contextForm'
 import {  useState } from 'react';
 import FormCard from './components/FormCard/FormCard'
 import Step3 from './components/Step3/Step3'
+import Step4 from './components/Step4/Step4'
+import LeftBar from './components/LeftBar/LeftBar'
 
 export default function Home() {
 
   const [formStep, setFormStep] = useState(0);
+  const [furthestStep, setFurthestStep] = useState(0);
   
 
   const nextStep = () => {
     setFormStep(formStep + 1);
+    setFurthestStep(furthestStep => Math.max(furthestStep, formStep + 1));
   }
 
   const prevStep = () => {
@@ -24,9 +28,11 @@ export default function Home() {
     <FormProvider>
       <main className={styles.main}>
         <FormCard currentStep={formStep} prevFormStep={prevStep} nextFormStep={nextStep} >
-          {formStep === 0 && <Step1 formStep={formStep} nextStep={nextStep}  />}
-          {formStep === 1 && <Step2 formStep={formStep} prevStep={prevStep} nextStep={nextStep}  />}
-          {formStep === 2 && <Step3 formStep={formStep} prevStep={prevStep} nextStep={nextStep}  />}
+          <LeftBar currentStep={formStep} setCurrentStep={setFormStep} furthestStep={furthestStep} />
+          {formStep === 0 && <Step1 nextStep={nextStep}  />}
+          {formStep === 1 && <Step2 nextStep={nextStep}  />}
+          {formStep === 2 && <Step3 nextStep={nextStep}  />}
+          {formStep === 3 && <Step4/>}
         </FormCard>
       </main>
     </FormProvider>

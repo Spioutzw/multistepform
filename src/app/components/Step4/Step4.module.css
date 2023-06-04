@@ -1,0 +1,42 @@
+.containerAll {
+    height: 100vh;
+    background-color: #EFF5FF;
+}
+
+.containerForm {
+    position: absolute;
+    margin: 0 15px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+    top: 98px;
+}
+
+.containerInfo {
+    background-color: #F8F9FF;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.police {
+    color: #9699AA;
+    font-size: 14px;
+}
+
+.police5 {
+    color: #022959;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.totalPrice {
+    font-weight: 700;
+    font-size: 16px;
+    color: #483EFF;
+}
+
+.containerInfo > hr {
+    background-color: #9699AA;
+    mix-blend-mode: normal;
+    opacity: 0.2;
+}

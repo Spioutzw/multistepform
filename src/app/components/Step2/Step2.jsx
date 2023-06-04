@@ -65,15 +65,16 @@ function Step2({ nextStep }) {
     const updateData = (plan) => {
 
         const selectedPlan = {
-            name: plan.name,
-            price: isMonthly ? plan.monthly : plan.yearly,
+            namePlan: plan.name,
+            pricePlan: isMonthly ? plan.monthly : plan.yearly,
             isMonthly: isMonthly
         };
         setSelectedPlan(selectedPlan);
     }
 
     const saveData = () => {
-        if (selectedPlan === null) {
+        if (data.namePlan === undefined) {
+            console.log(data.namePlan);
             alert('Veuillez sélectionner un plan avant de continuer');
             return;
         }
@@ -91,22 +92,50 @@ function Step2({ nextStep }) {
 
 
     const handleSelectStyle = useCallback((event) => {
-        [arcadeRef, advancedRef, proRef].forEach(ref => {
-          ref.current.classList.remove(`${style.selected}`);
-        });
+        console.log(event.target)
+        // Check if the clicked element is the div itself
+        if (event.target === event.currentTarget) {
+          // Remove the selected class from all elements
+          [arcadeRef,advancedRef,proRef].forEach(ref => {
+            ref.current.classList.remove(`${style.selected}`);
+          });
       
-        event.target.classList.add(`${style.selected}`);
+          // Add the selected class to the clicked element
+          event.target.classList.add(`${style.selected}`);
+        }
       }, []);
 
-      console.log(selectedPlan);
+      useEffect(() => {
+        // Remove the selected class from all elements
+        [arcadeRef, advancedRef, proRef].forEach((ref) => {
+        ref.current.classList.remove(`${style.selected}`);
+        });
+
+        console.log(data.namePlan);
+       
+        // Add the selected class to the selected plan's div
+        if (data) {
+        switch (data.namePlan) {
+        case 'Arcade':
+        arcadeRef.current.classList.add(`${style.selected}`);
+        break;
+        case 'Advanced':
+        advancedRef.current.classList.add(`${style.selected}`);
+        break;
+        case 'Pro':
+        proRef.current.classList.add(`${style.selected}`);
+        break;
+        }
+        }
+       }, [data]);
+
 
     return (
         <>
-            <LeftBar />
             <div className={style.containerAll}>
                 <div className={style.containerForm}>
                     <TitleSubtitle title="Select your plan" subTitle="You have the option of monthly or yearly billing." />
-                    <form id='stepForm' onSubmit={ () => handleSubmit(saveData)}>
+                    <form id='stepForm' onSubmit={handleSubmit(saveData)}>
                         <div ref={arcadeRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Arcade); handleSelectStyle(e) }} >
                             <Image className={style.image} src="/images/icon-arcade.svg" alt="Picture of the author" width={30} height={30} />
                             <div className={style.card}>
@@ -144,4 +173,4 @@ function Step2({ nextStep }) {
     )
 }
 
-export default memo(Step2)
+export default Step2

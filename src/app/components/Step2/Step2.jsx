@@ -73,7 +73,7 @@ function Step2({ nextStep }) {
     }
 
     const saveData = () => {
-        if (data.namePlan === undefined) {
+        if (selectedPlan === null && data.namePlan === undefined) {
             console.log(data.namePlan);
             alert('Veuillez sélectionner un plan avant de continuer');
             return;
@@ -112,6 +112,8 @@ function Step2({ nextStep }) {
         });
 
         console.log(data.namePlan);
+        console.log(data);
+        console.log(selectedPlan);
        
         // Add the selected class to the selected plan's div
         if (data) {

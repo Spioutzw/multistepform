@@ -19,9 +19,10 @@ function Step4() {
 
 
   const { data } = useFormState();
-  console.log(data)
+  console.log(data, 'data4');
   const { handleSubmit } = useForm({ defaultValues: data });
   const totalPrice = getTotalPrice(data);
+
   const saveData = () => {
     console.log(data)
   };
@@ -34,7 +35,7 @@ function Step4() {
           <form id='stepForm' onSubmit={handleSubmit(saveData)}>
             <div className={style.containerInfo}>
               <div>
-                <p className={style.police5}>{data.namePlan} {data.isMonthly ? '(Monthly)' : '(Yearly)'}</p>
+                <p className={style.police5}>{data.namePlan} {data.isYearly ?'(Yearly)' : '(Monthly)' }</p>
                 <span className={style.police5}>{data.pricePlan}</span>
                 <Link className={`${style.police}`} href="/">Change</Link>
               </div>
@@ -47,8 +48,8 @@ function Step4() {
               )
               )}
             </div>
-            <p className={`${style.police}`}>{`Total ${data.isMonthly ? 'per month' : 'per year'}`}</p>
-            <span className={style.totalPrice}>{`${data.isMonthly ? '+' : ''}$${totalPrice}${data.isMonthly ? '/mo' : '/yr'}`}</span>
+            <p className={`${style.police}`}>{`Total ${data.isYearly ? 'per year' : 'per month' }`}</p>
+            <span className={style.totalPrice}>{`${data.isYearly ? '+' : ''}$${totalPrice}${data.isYearly ?  '/yr' : '/mo'}`}</span>
           </form>
         </div>
       </div>

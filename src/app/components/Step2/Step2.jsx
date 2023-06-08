@@ -40,7 +40,8 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
 function Step2({ nextStep }) {
     const { data, setFormValues } = useFormState();
     const [selectedPlan, setSelectedPlan] = useState(null);
-    const [isMonthly, setIsMonthly] = useState(true);
+    console.log(data.isYearly,'data.isMonthly');
+    const [isYearly, setIsYearly] = useState(data.isYearly ? data.isYearly : false);
     const [planPrices, setPlanPrices] = useState({
         Arcade: {
             name: 'Arcade',
@@ -63,11 +64,10 @@ function Step2({ nextStep }) {
 
 
     const updateData = (plan) => {
-
         const selectedPlan = {
             namePlan: plan.name,
-            pricePlan: isMonthly ? plan.monthly : plan.yearly,
-            isMonthly: isMonthly
+            pricePlan: isYearly ? plan.yearly : plan.monthly ,
+            isYearly: isYearly
         };
         setSelectedPlan(selectedPlan);
     }
@@ -83,8 +83,16 @@ function Step2({ nextStep }) {
     };
 
     const handleChangeSwitch = () => {
-        setIsMonthly(!isMonthly);
+        setIsYearly((prevIsYearly) => {
+            const newIsYearly = !prevIsYearly;
+            console.log(newIsYearly,'newIsYearly');
+            setSelectedPlan((prevState) => {
+                return { ...prevState, isYearly: newIsYearly, pricePlan: newIsYearly  === true ? planPrices.Arcade.yearly : planPrices.Arcade.monthly };
+            });
+            return newIsYearly;
+        });
     };
+
 
     const arcadeRef = useRef();
     const advancedRef = useRef();
@@ -106,15 +114,15 @@ function Step2({ nextStep }) {
       }, []);
 
       useEffect(() => {
+
+        console.log(isYearly);
+
         // Remove the selected class from all elements
         [arcadeRef, advancedRef, proRef].forEach((ref) => {
         ref.current.classList.remove(`${style.selected}`);
         });
 
-        console.log(data.namePlan);
-        console.log(data);
-        console.log(selectedPlan);
-       
+        
         // Add the selected class to the selected plan's div
         if (data) {
         switch (data.namePlan) {
@@ -142,35 +150,34 @@ function Step2({ nextStep }) {
                             <Image className={style.image} src="/images/icon-arcade.svg" alt="Picture of the author" width={30} height={30} />
                             <div className={style.card}>
                                 <p className={style.titleChoice}>{planPrices.Arcade.name}</p>
-                                <p className={style.price}>{isMonthly ? planPrices.Arcade.monthly : planPrices.Arcade.yearly}</p>
-                                {isMonthly ? <p className={style.free}>2 months free </p> : ''}
+                                <p className={style.price}>{!isYearly ? planPrices.Arcade.monthly : planPrices.Arcade.yearly}</p>
+                                {isYearly ? <p className={style.free}>2 months free </p> : ''}
                             </div>
                         </div>
                         <div ref={advancedRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Advanced); handleSelectStyle(e) }}>
                             <Image className={style.image} src="/images/icon-advanced.svg" alt="Picture of the author" width={30} height={30} />
                             <div className={style.card}>
                                 <p className={style.titleChoice}>{planPrices.Advanced.name}</p>
-                                <p className={style.price}>{isMonthly ? planPrices.Advanced.monthly : planPrices.Advanced.yearly}</p>
-                                {isMonthly ? <p className={style.free}>2 months free </p> : ''}
+                                <p className={style.price}>{!isYearly ? planPrices.Advanced.monthly : planPrices.Advanced.yearly}</p>
+                                {isYearly ? <p className={style.free}>2 months free </p> : ''}
                             </div>
                         </div>
                         <div ref={proRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Pro); handleSelectStyle(e) }}>
                             <Image className={style.image} src="/images/icon-pro.svg" alt="Picture of the author" width={30} height={30} />
                             <div className={style.card}>
                                 <p className={style.titleChoice}>{planPrices.Pro.name}</p>
-                                <p className={style.price}>{isMonthly ? planPrices.Pro.monthly : planPrices.Pro.yearly}</p>
-                                {isMonthly ? <p className={style.free}>2 months free </p> : ''}
+                                <p className={style.price}>{!isYearly ? planPrices.Pro.monthly : planPrices.Pro.yearly}</p>
+                                {isYearly ? <p className={style.free}>2 months free </p> : ''}
                             </div>
                         </div>
                         <div className={style.YM}>
                             <span>Monthly</span>
-                            <CustomSwitch onChange={handleChangeSwitch} />
+                            <CustomSwitch checked={isYearly} onChange={handleChangeSwitch} />
                             <span>Yearly</span>
                         </div>
                     </form>
                 </div>
             </div>
-
         </>
     )
 }

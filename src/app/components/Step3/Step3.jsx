@@ -8,20 +8,21 @@ import TitleSubtitle from '../TitleSubtitle/TitleSubtitle';
 
 function Step3({ nextStep }) {
   const { data, setFormValues } = useFormState();
+  console.log(data, 'data');
 
   const [selectedAddOns, setSelectedAddOns] = useState(data.selectedAddOns || []);
   const AddOns = {
     OnlineService: {
       name: 'Online Service',
-      price: data.isMonthly ? '$1/mo' : '$10/yr',
+      price: data.isYearly ? '$10/yr' : '$1/mo',
     },
     LargerStorage: {
       name: 'Larger Storage',
-      price: data.isMonthly ? '$2/mo' : '$20/yr',
+      price: data.isYearly ? '$20/yr' : '$2/mo',
     },
     CustomizableProfile: {
       name: 'Customizable Profile',
-      price: data.isMonthly ? '$2/mo' : '$20/yr',
+      price: data.isYearly ? '$20/yr' : '$2/mo',
     },
   };
 
@@ -60,6 +61,43 @@ function Step3({ nextStep }) {
 
   useEffect(() => {
 
+    if (data.selectedAddOns) {
+      if (data.isYearly) {
+        // modifie le prix des addOns dans data.selectedAddOns si l'utilisateur a choisi l'abonnement annuel
+        const newSelectedAddOns = data.selectedAddOns.map((addOn) => {
+          if (addOn.name === AddOns.OnlineService.name) {
+            return { ...addOn, price: '$10/yr' };
+          }
+          if (addOn.name === AddOns.LargerStorage.name) {
+            return { ...addOn, price: '$20/yr' };
+          }
+          if (addOn.name === AddOns.CustomizableProfile.name) {
+            return { ...addOn, price: '$20/yr' };
+          }
+          return addOn;
+        });
+        setSelectedAddOns(newSelectedAddOns);
+      } else {
+        // modifie le prix des addOns dans data.selectedAddOns si l'utilisateur a choisi l'abonnement mensuel
+        const newSelectedAddOns = data.selectedAddOns.map((addOn) => {
+          if (addOn.name === AddOns.OnlineService.name) {
+            return { ...addOn, price: '$1/mo' };
+          }
+          if (addOn.name === AddOns.LargerStorage.name) {
+            return { ...addOn, price: '$2/mo' };
+          }
+          if (addOn.name === AddOns.CustomizableProfile.name) {
+            return { ...addOn, price: '$2/mo' };
+          }
+          return addOn;
+        });
+        setSelectedAddOns(newSelectedAddOns);
+      }
+    }
+
+
+
+
     if (onlineServiceRef.current) {
       const onlineServiceCheckbox = onlineServiceRef.current.querySelector('input[type="checkbox"]');
       onlineServiceCheckbox.checked = selectedAddOns.some((addOn) => addOn.name === AddOns.OnlineService.name);
@@ -95,6 +133,8 @@ function Step3({ nextStep }) {
       }
     }
   }, [selectedAddOns]);
+
+  console.log(data);
 
   return (
     <>

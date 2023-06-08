@@ -132,7 +132,7 @@ function Step3({ nextStep }) {
         parentDiv.classList.remove(`${style.selected}`);
       }
     }
-  }, [selectedAddOns]);
+  }, []);
 
   console.log(data);
 

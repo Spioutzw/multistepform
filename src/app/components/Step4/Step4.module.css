@@ -12,10 +12,24 @@
     top: 98px;
 }
 
+.containerForm > * {
+    margin-bottom: 20px;
+}
+
 .containerInfo {
     background-color: #F8F9FF;
     border-radius: 8px;
     padding: 16px;
+    margin-bottom: 24px;
+}
+
+.containerInfo > div {
+    padding: 10px 0;
+}
+
+.containerPlan {
+    display: flex;
+    justify-content: space-between;
 }
 
 .police {
@@ -23,10 +37,24 @@
     font-size: 14px;
 }
 
+.link {
+    text-decoration: underline;
+}
+
 .police5 {
     color: #022959;
     font-size: 14px;
     font-weight: 500;
+}
+
+.containerAddons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.addonsPrice {
+    color: #022959;
+    font-size: 14px;
 }
 
 .totalPrice {

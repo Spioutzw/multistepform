@@ -5,14 +5,18 @@
 
 .containerForm {
     position: absolute;
-    margin: 0 15px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
     border-radius: 5px;
     padding: 15px;
     top: 98px;
+    left: 0;
+    right: 0;
+    width: 50%;
 }
 
-.containerForm > * {
+.containerForm>* {
     margin-bottom: 20px;
 }
 
@@ -21,25 +25,25 @@
     padding: 5px;
     border: solid 1px #ccc;
     border-radius: 10px;
-    margin : 10px 15px;
+    margin: 10px 15px;
 }
 
 .containerDiv input[type="checkbox"] {
     margin: 21px 16px;
-  }
-  
-  .containerDiv > div {
+}
+
+.containerDiv>div {
     flex-grow: 1;
     align-self: center;
-  }
+}
 
-  .containerDiv > div > p {
+.containerDiv>div>p {
     margin-top: 10px;
-  }
-  
-  .containerDiv .price {
+}
+
+.containerDiv .price {
     margin-left: auto;
-  }
+}
 
 .price {
     align-self: center;
@@ -60,8 +64,7 @@
 
 .selected {
     border-color: #483EFF;
-    background-color: #F8F9FF
-    ;
+    background-color: #F8F9FF;
 }
 
 .containerLP {
@@ -70,6 +73,6 @@
     text-align: center;
 }
 
-.containerLP > * {
+.containerLP>* {
     align-self: center;
 }

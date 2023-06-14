@@ -5,14 +5,18 @@
 
 .containerForm {
     position: absolute;
-    margin: 0 15px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
     border-radius: 5px;
     padding: 15px;
     top: 98px;
+    left: 0;
+    right: 0;
+    width: 50%;
 }
 
-.containerForm > * {
+.containerForm>* {
     margin-bottom: 20px;
 }
 
@@ -22,34 +26,34 @@
     padding: 5px;
     border: solid 1px #ccc;
     border-radius: 10px;
-    margin : 10px 15px;
+    margin: 10px 15px;
 }
 
 .selected {
     border-color: #483EFF;
-    background-color: #F8F9FF
-    ;
+    background-color: #F8F9FF;
 }
 
 .image {
-    margin : 8px 20px 0 10px;
+    margin: 8px 20px 0 10px;
 }
 
-.card > p {
+.card>p {
     padding: 2px;
 }
 
 .titleChoice {
-    color : #022959;
+    color: #022959;
     font-weight: 500;
 }
+
 .price {
     color: #9699AA;
     font-size: 14px;
 }
 
 .free {
-    color : #022959;
+    color: #022959;
     font-size: 12px;
 }
 
@@ -60,7 +64,7 @@
     margin: 10px 15px;
 }
 
-.YM > span {
+.YM>span {
     font-size: 14px;
 }
 

@@ -5,14 +5,18 @@
 
 .containerForm {
     position: absolute;
-    margin: 0 15px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
     border-radius: 5px;
     padding: 15px;
     top: 98px;
+    left: 0;
+    right: 0;
+    width: 50%;
 }
 
-.containerForm > * {
+.containerForm>* {
     margin-bottom: 20px;
 }
 
@@ -23,7 +27,7 @@
     margin-bottom: 24px;
 }
 
-.containerInfo > div {
+.containerInfo>div {
     padding: 10px 0;
 }
 
@@ -63,7 +67,7 @@
     color: #483EFF;
 }
 
-.containerInfo > hr {
+.containerInfo>hr {
     background-color: #9699AA;
     mix-blend-mode: normal;
     opacity: 0.2;

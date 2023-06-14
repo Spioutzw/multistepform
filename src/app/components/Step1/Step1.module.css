@@ -5,11 +5,15 @@
 
 .containerForm {
     position: absolute;
-    margin: 0 15px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
     border-radius: 5px;
     padding: 15px;
     top: 98px;
+    left: 0;
+    right: 0;
+    width: 50%;
 }
 
 .containerForm > * {
@@ -31,4 +35,5 @@
     border: solid 1px #ccc;
     padding: 0 10px;
     margin-bottom: 10px;
+    cursor: pointer;
 }

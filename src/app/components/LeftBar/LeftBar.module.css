@@ -1,7 +1,15 @@
 .container {
-    height: 25vh;
+    height: 20vh;
     background: url('/images/bg-sidebar-mobile.svg') no-repeat;
     background-size: 100%, contain;
     position: relative;
 }
+
+@media screen and (min-width: 768px) {
+    .container {
+        background: url('/images/bg-sidebar-desktop.svg') no-repeat;
+        background-size: 100%, contain;
+    }
+}
+    
 

@@ -3,8 +3,6 @@ import style from './FormCard.module.css';
 
 function FormCard({ children, currentStep, prevFormStep, nextFormStep }) {
 
-  console.log(currentStep);
-
   return (
     <div>
       {children}

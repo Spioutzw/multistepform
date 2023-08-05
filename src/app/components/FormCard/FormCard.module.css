@@ -1,8 +1,7 @@
 .containerButton {
     display: flex;
-    justify-content: space-between;
-    height: 72px;
-    
+    width: 100%;
+    background-color: white;
 }
 
 .buttonNext {
@@ -21,13 +20,25 @@
     padding: 16px 12px;
 }
 
-.buttonBack {
-    align-self: center;
-    background-color: white;
-    border: transparent;
-    color: #9699AA;
-    font-size: 14px;
-    font-weight: 500;
-    height: 16px;
-    margin : 25px 0 31px 16px
+.buttonNext:hover {
+    filter: brightness(1.5);
 }
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 1040px) {
+    .containerButton {
+        grid-column: 2;
+        background-color: unset;
+        width: unset;
+    }
+
+
+}
+    

@@ -1,8 +1,10 @@
 .container {
+    background: center / cover no-repeat url('/images/bg-sidebar-mobile.svg');
     display: flex;
     justify-content: center;
     gap: 10px;
     padding-top: 15px;
+    height: 16rem;
 }
 
 
@@ -14,4 +16,48 @@
     padding: 2px;
     background-color: transparent;
     color: white;
+    cursor: pointer;
+}
+
+.containerStep {
+    display: none;
+}
+
+
+@media screen and (min-width: 1040px) {
+    .container {
+        background: center / cover no-repeat url('/images/bg-sidebar-desktop.svg');
+        height: 100%;
+        border-radius: .5rem;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 3rem 2rem;
+        gap: 2rem;
+    }
+
+    .containerButtonStep {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .containerStep{
+        display :unset;
+    }
+
+    .containerStep > p:first-child {
+        margin-bottom: .25rem;
+        font-size: .9rem;
+        color: #D6D9E6;
+    }
+
+    .containerStep > p:last-child {
+        font-size: 1rem;
+        font-weight: 500;
+        color: white;
+    }
+
+
+
+
 }

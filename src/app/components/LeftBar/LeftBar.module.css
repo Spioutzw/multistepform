@@ -1,15 +1,15 @@
 .container {
-    height: 20vh;
-    background: url('/images/bg-sidebar-mobile.svg') no-repeat;
-    background-size: 100%, contain;
-    position: relative;
+    width: 100%;
+    position: absolute;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1040px) {
     .container {
-        background: url('/images/bg-sidebar-desktop.svg') no-repeat;
-        background-size: 100%, contain;
+        width: unset;
+        position: unset;
+        grid-row: 1/5;
     }
 }
     
+
 

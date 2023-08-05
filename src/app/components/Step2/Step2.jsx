@@ -40,7 +40,7 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
 function Step2({ nextStep }) {
     const { data, setFormValues } = useFormState();
     const [selectedPlan, setSelectedPlan] = useState(null);
-    console.log(data.isYearly,'data.isMonthly');
+    console.log(data.isYearly, 'data.isMonthly');
     const [isYearly, setIsYearly] = useState(data.isYearly ? data.isYearly : false);
     const [planPrices, setPlanPrices] = useState({
         Arcade: {
@@ -66,7 +66,7 @@ function Step2({ nextStep }) {
     const updateData = (plan) => {
         const selectedPlan = {
             namePlan: plan.name,
-            pricePlan: isYearly ? plan.yearly : plan.monthly ,
+            pricePlan: isYearly ? plan.yearly : plan.monthly,
             isYearly: isYearly
         };
         setSelectedPlan(selectedPlan);
@@ -85,9 +85,9 @@ function Step2({ nextStep }) {
     const handleChangeSwitch = () => {
         setIsYearly((prevIsYearly) => {
             const newIsYearly = !prevIsYearly;
-            console.log(newIsYearly,'newIsYearly');
+            console.log(newIsYearly, 'newIsYearly');
             setSelectedPlan((prevState) => {
-                return { ...prevState, isYearly: newIsYearly, pricePlan: newIsYearly  === true ? planPrices.Arcade.yearly : planPrices.Arcade.monthly };
+                return { ...prevState, isYearly: newIsYearly, pricePlan: newIsYearly === true ? planPrices.Arcade.yearly : planPrices.Arcade.monthly };
             });
             return newIsYearly;
         });
@@ -103,41 +103,41 @@ function Step2({ nextStep }) {
         console.log(event.target)
         // Check if the clicked element is the div itself
         if (event.target === event.currentTarget) {
-          // Remove the selected class from all elements
-          [arcadeRef,advancedRef,proRef].forEach(ref => {
-            ref.current.classList.remove(`${style.selected}`);
-          });
-      
-          // Add the selected class to the clicked element
-          event.target.classList.add(`${style.selected}`);
-        }
-      }, []);
+            // Remove the selected class from all elements
+            [arcadeRef, advancedRef, proRef].forEach(ref => {
+                ref.current.classList.remove(`${style.selected}`);
+            });
 
-      useEffect(() => {
+            // Add the selected class to the clicked element
+            event.target.classList.add(`${style.selected}`);
+        }
+    }, []);
+
+    useEffect(() => {
 
         console.log(isYearly);
 
         // Remove the selected class from all elements
         [arcadeRef, advancedRef, proRef].forEach((ref) => {
-        ref.current.classList.remove(`${style.selected}`);
+            ref.current.classList.remove(`${style.selected}`);
         });
 
-        
+
         // Add the selected class to the selected plan's div
         if (data) {
-        switch (data.namePlan) {
-        case 'Arcade':
-        arcadeRef.current.classList.add(`${style.selected}`);
-        break;
-        case 'Advanced':
-        advancedRef.current.classList.add(`${style.selected}`);
-        break;
-        case 'Pro':
-        proRef.current.classList.add(`${style.selected}`);
-        break;
+            switch (data.namePlan) {
+                case 'Arcade':
+                    arcadeRef.current.classList.add(`${style.selected}`);
+                    break;
+                case 'Advanced':
+                    advancedRef.current.classList.add(`${style.selected}`);
+                    break;
+                case 'Pro':
+                    proRef.current.classList.add(`${style.selected}`);
+                    break;
+            }
         }
-        }
-       }, [data]);
+    }, [data]);
 
 
     return (
@@ -146,28 +146,30 @@ function Step2({ nextStep }) {
                 <div className={style.containerForm}>
                     <TitleSubtitle title="Select your plan" subTitle="You have the option of monthly or yearly billing." />
                     <form id='stepForm' onSubmit={handleSubmit(saveData)}>
-                        <div ref={arcadeRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Arcade); handleSelectStyle(e) }} >
-                            <Image className={style.image} src="/images/icon-arcade.svg" alt="Picture of the author" width={30} height={30} />
-                            <div className={style.card}>
-                                <p className={style.titleChoice}>{planPrices.Arcade.name}</p>
-                                <p className={style.price}>{!isYearly ? planPrices.Arcade.monthly : planPrices.Arcade.yearly}</p>
-                                {isYearly ? <p className={style.free}>2 months free </p> : ''}
+                        <div>
+                            <div ref={arcadeRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Arcade); handleSelectStyle(e) }} >
+                                <Image className={style.image} src="/images/icon-arcade.svg" alt="Picture of the author" width={30} height={30} />
+                                <div className={style.card}>
+                                    <p className={style.titleChoice}>{planPrices.Arcade.name}</p>
+                                    <p className={style.price}>{!isYearly ? planPrices.Arcade.monthly : planPrices.Arcade.yearly}</p>
+                                    {isYearly ? <p className={style.free}>2 months free </p> : ''}
+                                </div>
                             </div>
-                        </div>
-                        <div ref={advancedRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Advanced); handleSelectStyle(e) }}>
-                            <Image className={style.image} src="/images/icon-advanced.svg" alt="Picture of the author" width={30} height={30} />
-                            <div className={style.card}>
-                                <p className={style.titleChoice}>{planPrices.Advanced.name}</p>
-                                <p className={style.price}>{!isYearly ? planPrices.Advanced.monthly : planPrices.Advanced.yearly}</p>
-                                {isYearly ? <p className={style.free}>2 months free </p> : ''}
+                            <div ref={advancedRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Advanced); handleSelectStyle(e) }}>
+                                <Image className={style.image} src="/images/icon-advanced.svg" alt="Picture of the author" width={30} height={30} />
+                                <div className={style.card}>
+                                    <p className={style.titleChoice}>{planPrices.Advanced.name}</p>
+                                    <p className={style.price}>{!isYearly ? planPrices.Advanced.monthly : planPrices.Advanced.yearly}</p>
+                                    {isYearly ? <p className={style.free}>2 months free </p> : ''}
+                                </div>
                             </div>
-                        </div>
-                        <div ref={proRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Pro); handleSelectStyle(e) }}>
-                            <Image className={style.image} src="/images/icon-pro.svg" alt="Picture of the author" width={30} height={30} />
-                            <div className={style.card}>
-                                <p className={style.titleChoice}>{planPrices.Pro.name}</p>
-                                <p className={style.price}>{!isYearly ? planPrices.Pro.monthly : planPrices.Pro.yearly}</p>
-                                {isYearly ? <p className={style.free}>2 months free </p> : ''}
+                            <div ref={proRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Pro); handleSelectStyle(e) }}>
+                                <Image className={style.image} src="/images/icon-pro.svg" alt="Picture of the author" width={30} height={30} />
+                                <div className={style.card}>
+                                    <p className={style.titleChoice}>{planPrices.Pro.name}</p>
+                                    <p className={style.price}>{!isYearly ? planPrices.Pro.monthly : planPrices.Pro.yearly}</p>
+                                    {isYearly ? <p className={style.free}>2 months free </p> : ''}
+                                </div>
                             </div>
                         </div>
                         <div className={style.YM}>

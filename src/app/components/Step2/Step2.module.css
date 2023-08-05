@@ -29,6 +29,10 @@
     margin: 10px 15px;
 }
 
+.containerDiv:hover {
+    border-color: #483EFF;
+}
+
 .selected {
     border-color: #483EFF;
     background-color: #F8F9FF;
@@ -74,4 +78,30 @@
 
 .YM span:last-child {
     color: #9699AA;
+}
+
+
+@media screen and (min-width: 1040px) {
+    .containerAll {
+        display: grid;
+        height: unset;
+        margin-top: 1rem;
+    }
+
+    .containerForm {
+        position: unset;
+        margin: unset;
+        width: 100%
+    }
+
+    .containerDiv {
+        height: 10rem;
+        width: 10rem;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
+    }
+
+
+
 }

@@ -146,7 +146,7 @@ function Step2({ nextStep }) {
                 <div className={style.containerForm}>
                     <TitleSubtitle title="Select your plan" subTitle="You have the option of monthly or yearly billing." />
                     <form id='stepForm' onSubmit={handleSubmit(saveData)}>
-                        <div>
+                        <div className={style.containerPlanPrice}>
                             <div ref={arcadeRef} className={style.containerDiv} onClick={(e) => { updateData(planPrices.Arcade); handleSelectStyle(e) }} >
                                 <Image className={style.image} src="/images/icon-arcade.svg" alt="Picture of the author" width={30} height={30} />
                                 <div className={style.card}>

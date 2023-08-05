@@ -79,6 +79,7 @@
         display: grid;
         height: unset;
         margin-top: 1rem;
+        background-color: unset;
     }
 
     .containerForm {
